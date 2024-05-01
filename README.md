@@ -31,7 +31,7 @@ def get_current_weather(ctx, location, unit="fahrenheit"):
 
 Next create a BaseTools object with all your tools, in this case just get_current_weather. Get the docs for the LLM from this object.
 ```python
-tools = BaseTools([get_time_now, get_existing_tags, get_art, forget])
+tools = BaseTools([get_current_weather])
 
 response = completions.create(
         model="your_model_here",
