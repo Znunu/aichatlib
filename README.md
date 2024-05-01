@@ -43,8 +43,13 @@ Say the response contains multiple tool calls. The tools object will take in a t
 ```python
 responses = []
 for call in response["message"]["tools_calls]:
-    response.append(tools.execute_tool_call(ctx, call)) 
+    response.append(tools.execute_tool_call(ctx, call))
+messages.extend(responses)
 ```
+That's it! You can now request the next completion.
+
+# What's next?
+If this receives any attention, I will work on adding a message type and a conversation type, to handle everything else for you.
 
 
 
