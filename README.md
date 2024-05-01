@@ -6,7 +6,7 @@ This project is in development. I am working on this out of frustration of the p
 - copy all the python files in this repo and place into your project
 
 # Example
-BaseTools in tools.py lets you easily add tool function functionality.
+BaseTools in tools.py lets you easily add tool functions for the LLM to use.
 
 First define the function that you want the llm to use. Instead of later creating a dict with your documentation, just document it how you normaly would with a python docstring. For the example I will use google style documentation.
 ```python
@@ -27,4 +27,15 @@ def get_current_weather(location, unit="fahrenheit"):
         return json.dumps({"location": "Paris", "temperature": "22", "unit": unit})
     else:
         return json.dumps({"location": location, "temperature": "unknown"})
+```
+
+Next create a BaseTools object with all your tools, in this case just get_current_weather. Get the docs for the LLM from this object.
+```python
+tools = BaseTools([get_time_now, get_existing_tags, get_art, forget])
+
+response = completions.create(
+        model="your_model_here",
+        messages=messages,
+        tools=tools.get_all_json_docs(),
+    )
 ```
