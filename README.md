@@ -1,5 +1,5 @@
 # aichatlib
-This project is in development. I am working on this out of frustration of the python openAI and Antropic libraries. They are very thin wrappers with an overreliance on dicts for everything. Especially when pictures and tools are brought into the mix, this leads to very buggy and unworkable code. This library will wrap those libraries.
+This project is in development. I am working on this out of frustration of the python openAI and Antropic libraries. They are very thin wrappers with an overreliance on dicts for everything. Especially when pictures and tools are brought into the mix, this leads to very buggy and unworkable code. This library will wrap those libraries. For now, this is made to work with the openAI library, however it can also work for antrophic or any other LLM by using the litellm library instead of the openAI one!
 
 # Install
 - install python module "parse_doc"
@@ -8,9 +8,9 @@ This project is in development. I am working on this out of frustration of the p
 # Example
 BaseTools in tools.py lets you easily add tool functions for the LLM to use.
 
-First define the function that you want the llm to use. Instead of later creating a dict with your documentation, just document it how you normaly would with a python docstring. For the example I will use google style documentation.
+First define the function that you want the llm to use. Instead of later creating a dict with your documentation, just document it how you normaly would with a python docstring. For the example I will use google style documentation. Always add an extra undocumented "ctx" parameter. This won't be provided by the LLM and contains the context of where the function was called, e.g. what user requested this.
 ```python
-def get_current_weather(location, unit="fahrenheit"):
+def get_current_weather(ctx, location, unit="fahrenheit"):
     """
     Get the current weather in a given location
 
@@ -39,3 +39,13 @@ response = completions.create(
         tools=tools.get_all_json_docs(),
     )
 ```
+Say the response contains multiple tool calls. The tools object will take in a tool call and return the response, ready to be appended to your messages. Just don't forget to provide the ctx yourself!
+```python
+responses = []
+for call in response["message"]["tools_calls]:
+    response.append(tools.execute_tool_call(ctx, call)) 
+```
+
+
+
+
