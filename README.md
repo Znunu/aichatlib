@@ -17,7 +17,7 @@ def get_current_weather(location, unit="fahrenheit"):
     args:
       location (string): The city and state, e.g. San Francisco, CA
       unit (string, optional): enum, either "celsius" or "fahrenheit"
-    ""
+    """
     if "tokyo" in location.lower():
         return json.dumps({"location": "Tokyo", "temperature": "10", "unit": unit})
     elif "san francisco" in location.lower():
