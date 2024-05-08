@@ -30,7 +30,7 @@ class Message:
         self.role = role
         self.text = text
 
-    async def convert_to(self, model: util.Models):
+    async def convert_to(self, model: Models):
         return await self.convert_to_openai()
 
     async def convert_to_openai(self):
@@ -44,10 +44,10 @@ class PictureMessage(Message):
         super().__init__(role, text)
         self.picture = picture
 
-    async def convert_to(self, model: util.Models):
-        if model is util.Models.GPT:
+    async def convert_to(self, model: Models):
+        if model is Models.GPT:
             return await self.convert_to_openai()
-        elif model is util.Models.CLAUDE:
+        elif model is Models.CLAUDE:
             return await self.convert_to_anthropic()
 
     async def convert_to_openai(self):
