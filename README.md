@@ -58,7 +58,7 @@ from message import *
 
 log = []
 log.append(Message(Role.USER, "hello there!"))
-log.append(PictureMessage(Message(Role.USER, yourImageUrl, "Hello!!"))
+log.append(PictureMessage(Message(Role.USER, yourImageUrl, "Hello!!")))
 ```
 
 Call convert_to on every message, to prep them to be sent to the API
