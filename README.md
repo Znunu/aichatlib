@@ -64,7 +64,7 @@ log.append(PictureMessage(Message(Role.USER, yourImageUrl, "Hello!!")))
 
 Call convert_to on every message, to prep them to be sent to the API
 ```python
-ready_log = [convert_to(Model.GPT) for msg in log]
+ready_log = [convert(msg, Model.GPT) for msg in log]
 completion = (...
 ```
 
