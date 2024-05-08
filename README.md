@@ -44,7 +44,7 @@ response = completions.create(
 Say the response contains multiple tool calls. The tools object will take in a tool call and return the response, ready to be appended to your messages. Just don't forget to provide the ctx yourself!
 ```python
 responses = []
-for call in response["message"]["tools_calls]:
+for call in response["message"]["tools_calls"]:
     response.append(tools.execute_tool_call(ctx, call))
 messages.extend(responses)
 ```
