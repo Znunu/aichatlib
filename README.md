@@ -51,7 +51,7 @@ messages.extend(responses)
 That's it! You can now request the next completion.
 
 # message.py example
-Message.py provides convenient classes for messages.
+message.py provides convenient classes for messages.
 
 Add some messages
 ```python
