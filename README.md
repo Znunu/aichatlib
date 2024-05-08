@@ -5,7 +5,7 @@ This project is in development. I am working on this out of frustration of the p
 - install python module "parse_doc"
 - copy all the python files in this repo and place into your project
 
-# Example
+# tools.py example
 BaseTools in tools.py lets you easily add tool functions for the LLM to use.
 
 First define the function that you want the llm to use. Instead of later creating a dict with your documentation, just document it how you normaly would with a python docstring. For the example I will use google style documentation. Always add an extra undocumented "ctx" parameter. This won't be provided by the LLM and contains the context of where the function was called, e.g. what user requested this.
@@ -31,6 +31,8 @@ def get_current_weather(ctx, location, unit="fahrenheit"):
 
 Next create a BaseTools object with all your tools, in this case just get_current_weather. Get the docs for the LLM from this object.
 ```python
+from tools import BaseTools
+
 tools = BaseTools([get_current_weather])
 
 response = completions.create(
@@ -48,8 +50,25 @@ messages.extend(responses)
 ```
 That's it! You can now request the next completion.
 
+# message.py example
+
+Add some messages
+```python
+from message import *
+
+log = []
+log.append(Message(Role.USER, "hello there!"))
+log.append(PictureMessage(Message(Role.USER, yourImageUrl, "Hello!!"))
+```
+
+Call convert_to on every message, to prep them to be sent to the API
+```python
+ready_log = [convert_to(Model.GPT) for msg in log]
+completion = (...
+```
+
 # What's next?
-If this receives any attention, I will work on adding a message type and a conversation type, to handle everything else for you.
+If this receives any attention, I will keep expanding on this, to handle everything else for you.
 
 
 
