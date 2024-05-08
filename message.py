@@ -17,7 +17,10 @@ class Role(Enum):
     ASSISTANT = "assistant"
     USER = "user"
     TOOL = "tool"
-
+    
+class Models(Enum):
+    GPT = 1
+    CLAUDE = 2
 
 class Message:
     text: str
