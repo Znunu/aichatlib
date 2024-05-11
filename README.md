@@ -1,6 +1,9 @@
 # aichatlib
 This project is in development. I am working on this out of frustration of the python openAI and Antropic libraries. They are very thin wrappers with an overreliance on dicts for everything. Especially when pictures and tools are brought into the mix, this leads to very buggy and unworkable code. This library will wrap those libraries. For now, this is made to work with the openAI library, however it can also work for antrophic or any other LLM by using the litellm library instead of the openAI one!
 
+Join [my discord server](https://discord.gg/kw6PCBaW5y) to get support
+
+
 # Install
 - install python module "parse_doc", "pillow" and "httpx"
 - copy all the python files in this repo and place into your project
