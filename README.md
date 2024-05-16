@@ -35,6 +35,7 @@ def get_current_weather(ctx, location, unit="fahrenheit"):
 Next create a BaseTools object with all your tools, in this case just get_current_weather. Get the docs for the LLM from this object.
 ```python
 from tools import BaseTools
+from message import convert
 
 tools = BaseTools([get_current_weather])
 
@@ -46,12 +47,12 @@ response = completions.create(
 ```
 Say the response contains multiple tool calls. The tools object will take in a tool call and return the response, ready to be appended to your messages. Just don't forget to provide the ctx yourself!
 ```python
-responses = []
-for call in response["message"]["tools_calls"]:
-    response.append(tools.execute_tool_call(ctx, call))
-messages.extend(responses)
+tool_call_msg = tools.new_tool_call_msg(response.message)
+messages.extend([convert(tool_call_msg)])
+tool_response_msgs = await tool_call_msg.get_responses(ctx)
+messages.extend([convert(msg) for msg in tool_response_msgs])
 ```
-That's it! You can now request the next completion.
+That's it! You can now request the next completion
 
 # message.py example
 message.py provides convenient classes for messages.
